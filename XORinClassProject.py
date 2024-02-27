@@ -17,3 +17,50 @@ def decode(binary):
     charIndex = int(binary, 2)
     return characters[charIndex]
 
+
+def XOR(bit1,bit2):
+    if bit1 == bit2:
+      return '0'
+    else:
+      return '1'
+
+
+
+
+
+def XORonByte(byte, key):
+    emsg = ""
+
+
+    for i in range(len(byte)):
+        emsg += XOR(byte[i], key[i])
+
+
+    return emsg
+
+
+
+
+
+
+def XORonLetter(letter, keyLetter):
+    letterbin = encode(letter)
+    keyLetterbin = encode(keyLetter)
+
+
+    eLetter = XORonByte(letterbin, keyLetterbin)
+
+    return decode(eLetter)
+
+
+print(XORonLetter("d", "r"))
+
+def XORonSentence(sentence, key):
+
+    Esentence= ""
+
+    for i in range(len(sentence)):
+        Esentence += XORonLetter(sentence[i], key[i])
+    return Esentence
+
+print(XORonSentence("hello", "world"))
