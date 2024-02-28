@@ -1,3 +1,5 @@
+import math
+
 characters = [
     # lowercase characters
 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
@@ -58,9 +60,37 @@ print(XORonLetter("d", "r"))
 def XORonSentence(sentence, key):
 
     Esentence= ""
+    genKey = generateKey(sentence, key)
 
     for i in range(len(sentence)):
-        Esentence += XORonLetter(sentence[i], key[i])
+        Esentence += XORonLetter(sentence[i], genKey[i])
     return Esentence
 
-print(XORonSentence("hello", "world"))
+
+
+def generateKey(message, key):
+    if len(message) == len(key):
+        return key
+
+    elif len(message) < len(key):
+    
+        return key[0:len(message)]
+
+    else:
+        genkey =""
+        rep = math.floor(len(message)/len(key))
+
+        remain = len(message) % len(key)
+        for i in range(rep):
+            genkey += key
+
+        genkey += key[ 0:remain]  
+        
+        return genkey
+
+
+msg = input("Enter a Message")
+key = input("Enter a Key:")
+
+
+print("Your Encrypted Message is ", XORonSentence(msg, key))
